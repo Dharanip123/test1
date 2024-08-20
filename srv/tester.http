@@ -1,0 +1,66 @@
+###Get the service document - all the entities
+http://localhost:4004/odata/v4/CatalogService
+
+###Get Service metadata document
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Get Employye data - Employeeset
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+
+###Get Single Employee Set
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C19787FB
+
+###GEt the Total COUNT- $count
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+###Get the data chunk by chunk - pagination- $top
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=2
+
+###Get data with skip
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=5&$skip=2
+
+###GEt data with $filter  - $filter
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=bankName eq 'My Bank of Antioch'
+
+###Get data based on filter condition 
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst,'Su')
+
+###Get only particular fields (col) from employeeset - $select
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=nameFirst,nameLast,loginName
+
+###Create New Emp data with our data payload - CREATE --POST
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+  "nameFirst": "Dharani",
+  "nameMiddle": null,
+  "nameLast": "penta",
+  "nameInitials": null,
+  "sex": "F",
+  "language": "E",
+  "phoneNumber": "+917815855107",
+  "email": "dharani.p@gmail.com",
+  "loginName": "SPRINGS",
+  "Currency_code": "USD",
+  "salaryAmount": 100000,
+  "accountNumber": "111222333",
+  "bankId": "511000655",
+  "bankName": "My Bank of Antioch"
+}
+
+###Get the emp data which was just created
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/5ce42784-d441-4c7b-9134-82014779cef3
+
+###Update the emp data - PATCH (update)
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/5ce42784-d441-4c7b-9134-82014779cef3
+Content-Type: application/json
+
+{
+    
+  "salaryAmount": 1000000,
+  "Currency_code": "USD"
+}
+
+###Delete data from db using service - DELETE
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/5ce42784-d441-4c7b-9134-82014779cef3
